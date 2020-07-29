@@ -1,0 +1,2 @@
+const fauna = require('faunadb');
+
