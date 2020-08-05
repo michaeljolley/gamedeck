@@ -1,10 +1,10 @@
 import Vue from 'vue'
+import VueRouter from 'vue-router';
 import App from './App.vue'
-import router from './router'
 
 import { Auth0Plugin } from "./plugins/auth";
+import router from './router'
 
-// Install the authentication plugin here
 Vue.use(Auth0Plugin, {
   domain: process.env.VUE_APP_AUTH0_DOMAIN,
   client_id: process.env.VUE_APP_AUTH0_CLIENTID,
@@ -20,6 +20,8 @@ Vue.use(Auth0Plugin, {
 });
 
 Vue.config.productionTip = false
+
+Vue.use(VueRouter)
 
 new Vue({
   router,

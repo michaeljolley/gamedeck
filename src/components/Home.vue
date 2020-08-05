@@ -1,14 +1,15 @@
 <template>
   <div class="home">
-    <UserWidget />
-    <DigitalMK />
+    home
+    <button v-on:click="login">Here we go</button>
   </div>
 </template>
 <script>
-import UserWidget from "./UserWidget.vue";
-import DigitalMK from "./DigitalMK.vue";
-
 export default {
-  components: { UserWidget, DigitalMK },
+  methods: {
+    login: function () {
+      this.$auth.loginWithRedirect();
+    },
+  },
 };
 </script>
