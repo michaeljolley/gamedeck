@@ -1,0 +1,39 @@
+type Contestant @collection(name: "contestants") {
+  sub: String! @unique(index: "unique_sub"),
+  handle: String!,
+  isActive: Boolean!,
+  picture: String!,
+  sessions: [Session!] @relation(name: "contestants_sessions")
+}
+
+type Challenge @collection(name: "challenges") {
+  name: String!,
+  description: String!,
+  criteria: String!,
+  points: Int!,
+  isActive: Boolean!
+}
+
+type Session @collection(name: "sessions") {
+  room: String! @unique(index: "unique_room"),
+  sessionId: String,
+  showDate: Date,
+  participants: [Contestant!] @relation(name: "contestants_sessions"),
+  completedChallenges: [CompletedChallenge!],
+  isActive: Boolean!
+}
+
+type CompletedChallenge @embedded {
+  handle: String!,
+  description: String!,
+  challenge: String!,
+  points: Int!,
+  completedAt: Time!
+}
+
+type Query {
+  allContestants: [Contestant!] @index(name: "contestants_all")
+  contestantsBySub(sub: String!): Contestant! @index(name: "contestants_sub" )
+  allChallenges: [Challenge!] @index(name: "challenges_all")
+  allSessions: [Session!] @index(name: "sessions_all")
+}
